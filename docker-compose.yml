@@ -1,0 +1,20 @@
+# PostgreSQL 16 + PostGIS 3.4 for the Mumbai Delivery Ops backend. Data persists in the named volume.
+# Start:  docker compose up -d      Stop: docker compose down      Wipe data: docker compose down -v
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: ${DB_NAME:-mumbai_ops}
+      POSTGRES_USER: ${DB_USER:-ops}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-ops_dev_password}
+    ports:
+      - "${DB_PORT:-5433}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-ops} -d ${DB_NAME:-mumbai_ops}"]
+      interval: 5s
+      retries: 20
+
+volumes:
+  pgdata:

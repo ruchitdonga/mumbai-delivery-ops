@@ -1,0 +1,19 @@
+# build output
+backend/target/
+frontend/node_modules/
+frontend/dist/
+
+# local settings and tool caches (not part of the project)
+.env
+.claude/
+frontend/.impeccable/
+.idea/
+.vscode/
+*.iml
+*.log
+
+# old local backup zip; the ambulance app is still in the source
+backups/
+
+# teacher's brief: kept locally, not published
+docs/delivery-mapper-brief.md
